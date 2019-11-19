@@ -14,7 +14,7 @@ import { first } from 'rxjs/operators';
 export class HomeComponent implements OnInit, OnDestroy {
   currentUser: User;
   currentUserSubscription: Subscription;
-  users: User[] = [];
+  users: any
 
   constructor(
       private authenticationService: AuthenticationService,
@@ -41,8 +41,12 @@ export class HomeComponent implements OnInit, OnDestroy {
   }
 
   private loadAllUsers() {
-      this.userService.getAll().pipe(first()).subscribe(users => {
-          this.users = users;
+      console.log('start')
+      this.userService.getAll().subscribe(response => {
+          this.users = response;
+          console.log(response)
       });
+      console.log(this.users)
+      console.log('end')
   }
 }
